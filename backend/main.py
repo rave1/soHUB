@@ -1,12 +1,12 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 import uvicorn
+from models import TempHumidity
 
 app = FastAPI()
 
 
 @app.post("/temp")
-async def temp(request: Request):
-    data = await request.json()
+async def temp(data: TempHumidity):
     print("data: ", data)
     return {"status": "ok"}
 
