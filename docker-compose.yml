@@ -2,6 +2,36 @@ services:
   backend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./backend/Dockerfile
     ports:
       - 80:8000
+    volumes:
+      - ./backend/:/app
+
+  influxdb:
+    image: influxdb:3-core
+    container_name: influxdb3-core
+    ports:
+      - "8181:8181"
+    volumes:
+      - influxdb3_data:/var/lib/influxdb3/data
+      - influxdb3_meta:/var/lib/influxdb3/meta
+    environment:
+      INFLUXDB3_OPERATOR_TOKEN: your-initial-token-here
+      INFLUXDB3_HTTP_BIND_ADDR: "0.0.0.0:8181"
+      INFLUXDB3_LOG_FILTER: "info"
+      INFLUXDB3_NODE_IDENTIFIER_PREFIX: "node1"
+    restart: unless-stopped
+
+  explorer:
+    image: influxdata/influxdb3-ui:1.4.0
+    container_name: influxdb3-explorer
+    ports:
+      - "8888:80"
+    volumes:
+      - ./config:/app-root/config:ro
+    restart: unless-stopped
+
+volumes:
+  influxdb3_data:
+  influxdb3_meta:
