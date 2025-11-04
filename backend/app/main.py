@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
-from models import TempHumidity
+from app.models import TempHumidity
 
 app = FastAPI()
 
@@ -11,5 +11,11 @@ async def temp(data: TempHumidity):
     return {"status": "ok"}
 
 
+@app.get("/")
+async def hello():
+    return {"message": "hello"}
+
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+### siema
