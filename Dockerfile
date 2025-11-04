@@ -6,4 +6,4 @@ ADD . /app
 WORKDIR /app
 
 RUN uv sync --locked
-ENTRYPOINT uv run flask --app app run --host=0.0.0.0 --debug
+CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
