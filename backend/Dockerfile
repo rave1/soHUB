@@ -1,10 +1,14 @@
 FROM python:3.14.0-alpine3.22 as base
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
-WORKDIR /app
-ADD ../pyproject.toml .
-ADD ../uv.lock .
-ADD *.py .
+ENV UV_PROJECT_ENVIRONMENT=/usr/local
+WORKDIR /code
+COPY ../pyproject.toml .
+COPY ../uv.lock .
+COPY ./app /code
 
 RUN uv sync --locked
-CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+WORKDIR /code/app
+
+CMD ["fastapi", "run", "main.py", "--port", "8000"]
