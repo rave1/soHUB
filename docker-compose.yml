@@ -7,6 +7,8 @@ services:
       - 80:8000
     volumes:
       - ./backend/app:/code/app
+    env_file:
+      - .env
 
   influxdb:
     image: influxdb:3-core
