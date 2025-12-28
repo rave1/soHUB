@@ -5,7 +5,7 @@ ENV UV_PROJECT_ENVIRONMENT=/usr/local
 WORKDIR /code
 COPY ../pyproject.toml .
 COPY ../uv.lock .
-COPY ./app /code
+COPY . .
 
 RUN uv sync --locked
 

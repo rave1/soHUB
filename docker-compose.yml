@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: ./backend/Dockerfile
     ports:
-      - 8000:8000
+      - 80:8000
     volumes:
       - ./backend/app:/code/app
     env_file:
@@ -20,7 +20,7 @@ services:
       - influxdb3_data:/var/lib/influxdb3/data
       - influxdb3_meta:/var/lib/influxdb3/meta
     environment:
-      INFLUXDB3_OPERATOR_TOKEN: your-initial-token-here
+      INFLUXDB3_ADMIN_TOKEN_FILE: "token.json"
       INFLUXDB3_HTTP_BIND_ADDR: "0.0.0.0:8181"
       INFLUXDB3_LOG_FILTER: "info"
       INFLUXDB3_NODE_IDENTIFIER_PREFIX: "node1"
