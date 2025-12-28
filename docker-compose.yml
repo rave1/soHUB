@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: ./backend/Dockerfile
     ports:
-      - 80:8000
+      - 8000:8000
     volumes:
       - ./backend/app:/code/app
     env_file:
