@@ -19,8 +19,9 @@ services:
     volumes:
       - influxdb3_data:/var/lib/influxdb3/data
       - influxdb3_meta:/var/lib/influxdb3/meta
+      - ./token.json:/home/token.json
     environment:
-      INFLUXDB3_ADMIN_TOKEN_FILE: "token.json"
+      INFLUXDB3_ADMIN_TOKEN_FILE: "/home/token.json"
       INFLUXDB3_HTTP_BIND_ADDR: "0.0.0.0:8181"
       INFLUXDB3_LOG_FILTER: "info"
       INFLUXDB3_NODE_IDENTIFIER_PREFIX: "node1"
